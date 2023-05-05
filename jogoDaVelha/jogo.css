@@ -1,4 +1,12 @@
-#tabela {
-    width: 200px;
-    height: 200px;
+.casas {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }

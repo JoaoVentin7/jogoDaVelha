@@ -11,14 +11,15 @@ function pegarValores() {
     }
 }
 
-function verificarVitoria() {
+function verificarVitoria(titulo) {
     for (let cont = 0; cont <= 7; cont++) {
-        if (tabuleiro[possiveisVitorias[cont][0]] == tabuleiro[possiveisVitorias[cont][1]] && tabuleiro[possiveisVitorias[cont][2]]
+        if (tabuleiro[possiveisVitorias[cont][0]] == tabuleiro[possiveisVitorias[cont][1]] && tabuleiro[possiveisVitorias[cont][1]] == tabuleiro[possiveisVitorias[cont][2]]
             && tabuleiro[possiveisVitorias[cont][0]] != ' '
             && tabuleiro[possiveisVitorias[cont][1]] != ' '
             && tabuleiro[possiveisVitorias[cont][2]] != ' '
         ) {
             vitoria = true;
+            titulo.innerHTML = `O jogador "${player}" parabéns!`
         }
     }
 }
@@ -27,20 +28,23 @@ function verificarVitoria() {
 for (let casa of casas) {
     casa.addEventListener('click',
         function () {
-            if (casa.innerHTML != ' ') {
-                return;
-            } else {
-                let titulo = document.querySelector('.titulo');
-                casa.innerHTML = player;
-                pegarValores();
-                verificarVitoria();
-                if (vitoria == true) {
-                    console.log(`jogador ${player} ganhou, parabéns!`);
+            if (vitoria == false) {
+                if (casa.innerHTML != ' ') {
                     return;
+                } else {
+                    let titulo = document.querySelector('.titulo');
+                    casa.innerHTML = player;
+                    pegarValores();
+                    verificarVitoria(titulo);
+                    if (vitoria == true) {
+                        console.log(`jogador ${player} ganhou, parabéns!`);
+                        return;
+                    }
+                    player == 'O' ? player = 'X' : player = 'O';
+                    titulo.innerHTML = `Turno de ${player}`
+                    turno++;
                 }
-                player == 'O' ? player = 'X' : player = 'O';
-                titulo.innerText == player;
-                turno++;
+
             }
         });
 };
