@@ -19,30 +19,46 @@ function verificarVitoria(titulo) {
             && tabuleiro[possiveisVitorias[cont][2]] != ' '
         ) {
             vitoria = true;
-            titulo.innerHTML = `O jogador "${player}" parabéns!`
+            titulo.innerHTML = `O jogador "${player}" venceu, parabéns!`
         }
     }
 }
 
+function reset() {
+    for (let casa of casas) {
+        casa.innerHTML = ' ';
+    }
+    pegarValores();
+    turno = 1;
+    player = 'O';
+    vitoria = false;
+    let titulo = document.querySelector('.titulo');
+    titulo.innerHTML = 'Turno de O'
+}
 
 for (let casa of casas) {
     casa.addEventListener('click',
         function () {
-            if (vitoria == false) {
+            if (vitoria == false && turno <= 9) {
                 if (casa.innerHTML != ' ') {
                     return;
                 } else {
                     let titulo = document.querySelector('.titulo');
                     casa.innerHTML = player;
                     pegarValores();
+
                     verificarVitoria(titulo);
-                    if (vitoria == true) {
-                        console.log(`jogador ${player} ganhou, parabéns!`);
+                    if (vitoria) {
                         return;
                     }
+
                     player == 'O' ? player = 'X' : player = 'O';
                     titulo.innerHTML = `Turno de ${player}`
                     turno++;
+
+                    if (turno == 10) {
+                        titulo.innerHTML = "Empatou, deu velha!";
+                    }
                 }
 
             }
