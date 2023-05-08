@@ -1,3 +1,7 @@
+body {
+    margin: 0px;
+}
+
 .container {
     width: 100vw;
     height: 100vh;
@@ -5,11 +9,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(172, 172, 172);
+    background-color: green;
+}
+
+.titulo {
+    margin-bottom: 10px;
+    color: white;
+    font-size: 45px;
 }
 
 .tabuleiro {
-    border: 0.25rem solid;
+    border: 6px solid;
     border-color: black;
 }
 
@@ -18,18 +28,34 @@
     height: 120px;
     text-align: center;
     background-color: white;
-    border: 0.1rem dashed;
+    border: 3px dashed;
     font-size: 80px;
 }
 
-.titulo {
-    margin-bottom: 10px;
+.casas:hover {
+    border-color: red;
 }
 
-body {
-    margin: 0px;
-}
-
-button {
+#resetButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    width: 70px;
+    height: 30px;
     margin-top: 10px;
+    border: solid black 3px;
+    background-color: white;
+    color: black;
+    box-shadow: 4px 7px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+#resetButton:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#resetButton:active {
+    cursor: pointer;
+    transform: scale(1);
 }

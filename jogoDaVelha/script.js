@@ -1,9 +1,13 @@
 let casas = document.querySelectorAll('.casas');
+let titulo = document.querySelector('.titulo');
+let container = document.querySelector('.container');
+let resetButton = document.querySelector('#resetButton');
+
 let player = 'O';
 let turno = 1;
 let vitoria = false;
 let tabuleiro = ['', '', '', '', '', '', '', '', ''];
-let possiveisVitorias = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+const possiveisVitorias = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
 function pegarValores() {
     for (let cont = 0; cont <= 8; cont++) {
@@ -12,8 +16,10 @@ function pegarValores() {
 }
 
 function verificarVitoria(titulo) {
+
     for (let cont = 0; cont <= 7; cont++) {
-        if (tabuleiro[possiveisVitorias[cont][0]] == tabuleiro[possiveisVitorias[cont][1]] && tabuleiro[possiveisVitorias[cont][1]] == tabuleiro[possiveisVitorias[cont][2]]
+        if (tabuleiro[possiveisVitorias[cont][0]] == tabuleiro[possiveisVitorias[cont][1]]
+            && tabuleiro[possiveisVitorias[cont][1]] == tabuleiro[possiveisVitorias[cont][2]]
             && tabuleiro[possiveisVitorias[cont][0]] != ' '
             && tabuleiro[possiveisVitorias[cont][1]] != ' '
             && tabuleiro[possiveisVitorias[cont][2]] != ' '
@@ -32,9 +38,13 @@ function reset() {
     turno = 1;
     player = 'O';
     vitoria = false;
-    let titulo = document.querySelector('.titulo');
+    container.style.backgroundColor = 'green';
     titulo.innerHTML = 'Turno de O'
 }
+
+resetButton.addEventListener('click', function () {
+    reset()
+})
 
 for (let casa of casas) {
     casa.addEventListener('click',
@@ -43,7 +53,6 @@ for (let casa of casas) {
                 if (casa.innerHTML != ' ') {
                     return;
                 } else {
-                    let titulo = document.querySelector('.titulo');
                     casa.innerHTML = player;
                     pegarValores();
 
@@ -54,10 +63,18 @@ for (let casa of casas) {
 
                     player == 'O' ? player = 'X' : player = 'O';
                     titulo.innerHTML = `Turno de ${player}`
+
+                    if (player == 'O') {
+                        container.style.backgroundColor = 'green';
+                    } else {
+                        container.style.backgroundColor = 'purple';
+                    }
+
                     turno++;
 
                     if (turno == 10) {
                         titulo.innerHTML = "Empatou, deu velha!";
+                        container.style.backgroundColor = 'grey';
                     }
                 }
 
